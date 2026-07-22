@@ -1,9 +1,9 @@
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
-import { useTranslation } from 'react-i18next'
-import CountdownTimer from '../molecules/CountdownTimer'
-import ProductCard from '../molecules/ProductCard'
-import Button from '../atoms/Button'
-import { Link } from 'react-router-dom'
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
+import CountdownTimer from "../molecules/CountdownTimer";
+import ProductCard from "../molecules/ProductCard";
+import Button from "../atoms/Button";
+import { Link } from "react-router-dom";
 
 export function SectionEyebrow({ children }) {
   return (
@@ -11,19 +11,21 @@ export function SectionEyebrow({ children }) {
       <span className="w-5 h-10 bg-primary rounded-sm" />
       <span className="text-sm font-semibold text-primary">{children}</span>
     </div>
-  )
+  );
 }
 
 export default function FlashSaleSection({ products, endsAt }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <section>
       <div className="flex items-end justify-between mb-6">
         <div>
-          <SectionEyebrow>{t('home.today')}</SectionEyebrow>
+          <SectionEyebrow>{t("home.today")}</SectionEyebrow>
           <div className="flex items-center gap-10">
-            <h2 className="font-heading text-2xl font-semibold">{t('home.flashSales')}</h2>
+            <h2 className="font-heading text-2xl font-semibold">
+              {t("home.flashSales")}
+            </h2>
             <CountdownTimer endsAt={endsAt} />
           </div>
         </div>
@@ -44,10 +46,10 @@ export default function FlashSaleSection({ products, endsAt }) {
       </div>
 
       <div className="flex justify-center mt-10">
-        <Button as={Link} to="/search" variant="primary" size="lg">
-          {t('home.viewAllProducts')}
+        <Button as={Link} to="#" variant="primary" size="lg">
+          {t("home.viewAllProducts")}
         </Button>
       </div>
     </section>
-  )
+  );
 }

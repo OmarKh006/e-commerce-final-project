@@ -7,7 +7,7 @@ const SLIDES = [
     eyebrow: "iPhone 14 Series",
     title: "Up to 10% off Voucher",
     cta: "Shop Now",
-    to: "/search?category=phones",
+    to: "#",
     image: "/Iphone.png",
   },
   {
@@ -15,32 +15,25 @@ const SLIDES = [
     eyebrow: "Apple Watch Series 8",
     title: "Up to 15% off Voucher",
     cta: "Shop Now",
-    to: "/search?category=smartwatch",
-    image: "https://picsum.photos/seed/applewatch8/600/400",
+    to: "#",
+    image: "/appleWatch.png",
   },
   {
     id: 3,
     eyebrow: "JBL Boombox",
     title: "Up to 20% off Voucher",
     cta: "Shop Now",
-    to: "/search?category=headphones",
-    image: "https://picsum.photos/seed/jblboombox/600/400",
+    to: "#",
+    image: "/JBL.png",
   },
+
   {
     id: 4,
-    eyebrow: "Sony Alpha Cameras",
-    title: "Up to 12% off Voucher",
-    cta: "Shop Now",
-    to: "/search?category=camera",
-    image: "https://picsum.photos/seed/sonyalpha/600/400",
-  },
-  {
-    id: 5,
     eyebrow: "Gaming Laptops",
     title: "Up to 18% off Voucher",
     cta: "Shop Now",
-    to: "/search?category=computers",
-    image: "https://picsum.photos/seed/gaminglaptop/600/400",
+    to: "#",
+    image: "/gamingLaptop.png",
   },
 ];
 

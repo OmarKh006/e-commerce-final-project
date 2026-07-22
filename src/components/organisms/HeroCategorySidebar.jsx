@@ -5,17 +5,17 @@ import { FiChevronRight } from "react-icons/fi";
 const SIDEBAR_LINKS = [
   {
     key: "womensFashion",
-    to: "/search?category=womens-fashion",
+    to: "#",
     hasSubmenu: true,
   },
-  { key: "mensFashion", to: "/search?category=mens-fashion", hasSubmenu: true },
-  { key: "electronics", to: "/search?category=electronics" },
-  { key: "homeLifestyle", to: "/search?category=home-lifestyle" },
-  { key: "medicine", to: "/search?category=medicine" },
-  { key: "sportsOutdoor", to: "/search?category=sports-outdoor" },
-  { key: "babysToys", to: "/search?category=babys-toys" },
-  { key: "groceriesPets", to: "/search?category=groceries-pets" },
-  { key: "healthBeauty", to: "/search?category=health-beauty" },
+  { key: "mensFashion", to: "#", hasSubmenu: true },
+  { key: "electronics", to: "#" },
+  { key: "homeLifestyle", to: "#" },
+  { key: "medicine", to: "#" },
+  { key: "sportsOutdoor", to: "#" },
+  { key: "babysToys", to: "#" },
+  { key: "groceriesPets", to: "#" },
+  { key: "healthBeauty", to: "#" },
 ];
 
 export default function HeroCategorySidebar() {

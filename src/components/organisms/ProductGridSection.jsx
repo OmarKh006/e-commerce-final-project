@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import ProductCard from '../molecules/ProductCard'
-import Button from '../atoms/Button'
-import { SectionEyebrow } from './FlashSaleSection'
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import ProductCard from "../molecules/ProductCard";
+import Button from "../atoms/Button";
+import { SectionEyebrow } from "./FlashSaleSection";
 
-export default function ProductGridSection({ eyebrow, title, products, showViewAllButton = false }) {
-  const { t } = useTranslation()
+export default function ProductGridSection({
+  eyebrow,
+  title,
+  products,
+  showViewAllButton = false,
+}) {
+  const { t } = useTranslation();
 
   return (
     <section>
@@ -15,8 +20,10 @@ export default function ProductGridSection({ eyebrow, title, products, showViewA
           <h2 className="font-heading text-2xl font-semibold">{title}</h2>
         </div>
         {!showViewAllButton && (
-          <Link to="/search" className="hidden md:block">
-            <Button variant="primary" size="sm">{t('home.viewAll')}</Button>
+          <Link to="#" className="hidden md:block">
+            <Button variant="primary" size="sm">
+              {t("home.viewAll")}
+            </Button>
           </Link>
         )}
       </div>
@@ -29,11 +36,11 @@ export default function ProductGridSection({ eyebrow, title, products, showViewA
 
       {showViewAllButton && (
         <div className="flex justify-center mt-10">
-          <Button as={Link} to="/search" variant="primary" size="lg">
-            {t('home.viewAllProducts')}
+          <Button as={Link} to="#" variant="primary" size="lg">
+            {t("home.viewAllProducts")}
           </Button>
         </div>
       )}
     </section>
-  )
+  );
 }
