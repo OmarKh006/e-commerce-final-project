@@ -18,8 +18,6 @@ export const useAuthStore = create(() => ({
 
     if (error) return { success: false, error };
 
-    // If email confirmation is enabled in the Supabase project, signUp()
-    // succeeds but returns no session — the user isn't logged in yet.
     return { success: true, data, needsEmailConfirmation: !data.session };
   },
 
@@ -37,5 +35,11 @@ export const useAuthStore = create(() => ({
     await supabase.auth.signOut();
     useCartStore.getState().clear();
     useWishlistStore.getState().clear();
+  },
+
+  updatePassword: async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) return { success: false, error };
+    return { success: true };
   },
 }));
