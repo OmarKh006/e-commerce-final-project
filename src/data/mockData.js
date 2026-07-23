@@ -97,19 +97,19 @@ export const teamMembers = [
     id: "t1",
     name: "Tom Cruise",
     role: "Founder & Chairman",
-    image: "https://picsum.photos/seed/team1/400/400",
+    image: "/avatar1.png",
   },
   {
     id: "t2",
     name: "Emma Watson",
     role: "Managing Director",
-    image: "https://picsum.photos/seed/team2/400/400",
+    image: "/avatar2.png",
   },
   {
     id: "t3",
     name: "Will Smith",
     role: "Product Designer",
-    image: "https://picsum.photos/seed/team3/400/400",
+    image: "/avatar2.png",
   },
 ];
 
