@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import { categories } from "../../data/mockData";
+import { useCategories } from "../../hooks/useProducts";
 
 export default function CategoryMegaMenu({ open, onClose }) {
+  const { data: categories = [] } = useCategories();
+
   if (!open) return null;
 
   return (

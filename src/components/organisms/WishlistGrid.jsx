@@ -3,17 +3,34 @@ import ProductCard from '../molecules/ProductCard'
 import Button from '../atoms/Button'
 import { useWishlistStore } from '../../store/useWishlistStore'
 import { useCartStore } from '../../store/useCartStore'
-import { products as allProducts } from '../../data/mockData'
+import { useProducts } from '../../hooks/useProducts'
 
 export default function WishlistGrid() {
   const { t } = useTranslation()
   const productIds = useWishlistStore((s) => s.productIds)
   const addToCart = useCartStore((s) => s.addItem)
+  const { data: allProducts, isLoading, isError } = useProducts()
 
-  const wishlistedProducts = allProducts.filter((p) => productIds.includes(p.id))
+  const wishlistedProducts = (allProducts || []).filter((p) => productIds.includes(p.id))
 
   const moveAllToBag = () => {
     wishlistedProducts.forEach((p) => addToCart(p, 1))
+  }
+
+  if (isLoading) {
+    return (
+      <div className="text-center py-24">
+        <p className="text-body text-sm">Loading your wishlist…</p>
+      </div>
+    )
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-24">
+        <p className="text-error text-sm">Couldn&apos;t load your wishlist. Please try again later.</p>
+      </div>
+    )
   }
 
   if (wishlistedProducts.length === 0) {

@@ -9,10 +9,33 @@ import {
   PromoTile,
 } from "../components/organisms/PromoBannerSplit";
 import ServiceFeaturesBar from "../components/organisms/ServiceFeaturesBar";
-import { products, flashSaleEndsAt, jblOfferEndsAt } from "../data/mockData";
+import { flashSaleEndsAt, jblOfferEndsAt } from "../data/mockData";
+import { useProducts, useCategories } from "../hooks/useProducts";
 
 export default function Home() {
   const { t } = useTranslation();
+  const {
+    data: products,
+    isLoading: productsLoading,
+    isError: productsError,
+  } = useProducts();
+  const { data: categories } = useCategories();
+
+  if (productsLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-24 text-center text-sm text-body">
+        Loading products…
+      </div>
+    );
+  }
+
+  if (productsError) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-24 text-center text-sm text-error">
+        Something went wrong loading products. Please try again later.
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col gap-20">
@@ -21,15 +44,19 @@ export default function Home() {
         <HeroBanner />
       </div>
 
-      <FlashSaleSection products={products} endsAt={flashSaleEndsAt} />
+      {products.length > 0 && (
+        <FlashSaleSection products={products} endsAt={flashSaleEndsAt} />
+      )}
 
-      <CategoryBrowseSection />
+      <CategoryBrowseSection categories={categories || []} />
 
-      <ProductGridSection
-        eyebrow={t("home.thisMonth")}
-        title={t("home.bestSelling")}
-        products={products.slice(0, 4)}
-      />
+      {products.length > 0 && (
+        <ProductGridSection
+          eyebrow={t("home.thisMonth")}
+          title={t("home.bestSelling")}
+          products={products.slice(0, 4)}
+        />
+      )}
 
       <PromoBannerLarge
         eyebrow={t("home.categoriesEyebrow")}
@@ -38,12 +65,16 @@ export default function Home() {
         endsAt={jblOfferEndsAt}
       />
 
-      <ProductGridSection
-        eyebrow={t("home.ourProducts")}
-        title={t("home.exploreProducts")}
-        products={products}
-        showViewAllButton
-      />
+      {products.length > 0 ? (
+        <ProductGridSection
+          eyebrow={t("home.ourProducts")}
+          title={t("home.exploreProducts")}
+          products={products}
+          showViewAllButton
+        />
+      ) : (
+        <p className="text-center text-sm text-body">No products yet.</p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <PromoTile title="PlayStation 5" image="/PS5.png" size="lg" />

@@ -16,10 +16,10 @@ export default function AccountDropdown({ open, onClose }) {
 
   if (!open) return null;
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     onClose?.();
-    navigate("/");
+    navigate("/login");
   };
 
   const LINKS = [

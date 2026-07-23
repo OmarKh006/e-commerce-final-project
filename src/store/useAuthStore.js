@@ -1,32 +1,41 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { supabase } from "../lib/supabaseClient";
+import { useCartStore } from "./useCartStore";
+import { useWishlistStore } from "./useWishlistStore";
 
-export const useAuthStore = create(
-  persist(
-    (set) => ({
-      user: null, // { name, email } | null
+export const useAuthStore = create(() => ({
+  user: null,
+  loading: true,
 
-      // TODO: replace with supabase.auth.signInWithPassword(...)
-      login: (identifier) =>
-        set({
-          user: {
-            name: identifier.includes('@') ? identifier.split('@')[0] : 'Md Rimel',
-            email: identifier.includes('@') ? identifier : 'rimel1111@gmail.com',
-          },
-        }),
+  signup: async (name, email, password) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { name },
+      },
+    });
 
-      // TODO: replace with supabase.auth.signUp(...)
-      signup: (name, identifier) =>
-        set({
-          user: {
-            name,
-            email: identifier,
-          },
-        }),
+    if (error) return { success: false, error };
 
-      // TODO: replace with supabase.auth.signOut()
-      logout: () => set({ user: null }),
-    }),
-    { name: 'exclusive-auth' }
-  )
-)
+    // If email confirmation is enabled in the Supabase project, signUp()
+    // succeeds but returns no session — the user isn't logged in yet.
+    return { success: true, data, needsEmailConfirmation: !data.session };
+  },
+
+  login: async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) return { success: false, error };
+    return { success: true, data };
+  },
+
+  logout: async () => {
+    await supabase.auth.signOut();
+    useCartStore.getState().clear();
+    useWishlistStore.getState().clear();
+  },
+}));

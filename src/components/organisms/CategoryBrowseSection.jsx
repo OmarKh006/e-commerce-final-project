@@ -3,9 +3,8 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import CategoryIcon from '../molecules/CategoryIcon'
 import { SectionEyebrow } from './FlashSaleSection'
-import { categories } from '../../data/mockData'
 
-export default function CategoryBrowseSection({ onSelect }) {
+export default function CategoryBrowseSection({ categories = [], onSelect }) {
   const { t } = useTranslation()
   const [active, setActive] = useState(null)
 
