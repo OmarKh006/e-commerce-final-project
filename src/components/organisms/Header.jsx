@@ -1,30 +1,37 @@
-import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { FiHeart, FiShoppingCart, FiUser, FiMenu, FiGrid } from 'react-icons/fi'
-import Logo from '../atoms/Logo'
-import SearchBar from '../molecules/SearchBar'
-import CategoryMegaMenu from './CategoryMegaMenu'
-import AccountDropdown from './AccountDropdown'
-import NavMobileDrawer from './NavMobileDrawer'
-import { useWishlistStore } from '../../store/useWishlistStore'
-import { useCartStore } from '../../store/useCartStore'
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import {
+  FiHeart,
+  FiShoppingCart,
+  FiUser,
+  FiMenu,
+  FiGrid,
+} from "react-icons/fi";
+import Logo from "../atoms/Logo";
+import SearchBar from "../molecules/SearchBar";
+import CategoryMegaMenu from "./CategoryMegaMenu";
+import AccountDropdown from "./AccountDropdown";
+import NavMobileDrawer from "./NavMobileDrawer";
+import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 
 export default function Header({ isAuthenticated = false }) {
-  const { t } = useTranslation()
-  const [categoryOpen, setCategoryOpen] = useState(false)
-  const [accountOpen, setAccountOpen] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const { t } = useTranslation();
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const wishlistCount = useWishlistStore((s) => s.productIds.length)
-  const cartCount = useCartStore((s) => s.items.reduce((sum, i) => sum + i.qty, 0))
+  const { productIds } = useWishlist();
+  const { count: cartCount } = useCart();
+  const wishlistCount = productIds.length;
 
   const NAV_LINKS = [
-    { label: t('nav.home'), to: '/' },
-    { label: t('nav.contact'), to: '/contact' },
-    { label: t('nav.about'), to: '/about' },
-    { label: t('nav.signup'), to: '/signup' },
-  ]
+    { label: t("nav.home"), to: "/" },
+    { label: t("nav.contact"), to: "/contact" },
+    { label: t("nav.about"), to: "/about" },
+    { label: t("nav.signup"), to: "/signup" },
+  ];
 
   return (
     <header className="border-b border-line">
@@ -46,16 +53,19 @@ export default function Header({ isAuthenticated = false }) {
             onMouseLeave={() => setCategoryOpen(false)}
           >
             <button className="flex items-center gap-1 text-sm text-ink cursor-pointer">
-              <FiGrid size={14} /> {t('nav.categories')}
+              <FiGrid size={14} /> {t("nav.categories")}
             </button>
-            <CategoryMegaMenu open={categoryOpen} onClose={() => setCategoryOpen(false)} />
+            <CategoryMegaMenu
+              open={categoryOpen}
+              onClose={() => setCategoryOpen(false)}
+            />
           </div>
           {NAV_LINKS.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
               className={({ isActive }) =>
-                `text-sm ${isActive ? 'text-ink underline underline-offset-4' : 'text-ink/80 hover:text-ink'}`
+                `text-sm ${isActive ? "text-ink underline underline-offset-4" : "text-ink/80 hover:text-ink"}`
               }
             >
               {l.label}
@@ -90,18 +100,21 @@ export default function Header({ isAuthenticated = false }) {
             onMouseLeave={() => setAccountOpen(false)}
           >
             <Link
-              to={isAuthenticated ? '/account' : '/login'}
+              to={isAuthenticated ? "/account" : "/login"}
               aria-label="Account"
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${isAuthenticated ? 'bg-primary text-white' : 'text-ink'}`}
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${isAuthenticated ? "bg-primary text-white" : "text-ink"}`}
             >
               <FiUser size={isAuthenticated ? 16 : 20} />
             </Link>
-            <AccountDropdown open={accountOpen} onClose={() => setAccountOpen(false)} />
+            <AccountDropdown
+              open={accountOpen}
+              onClose={() => setAccountOpen(false)}
+            />
           </div>
         </div>
       </div>
 
       <NavMobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </header>
-  )
+  );
 }

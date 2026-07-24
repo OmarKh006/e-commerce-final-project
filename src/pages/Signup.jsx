@@ -5,12 +5,12 @@ import { FcGoogle } from "react-icons/fc";
 import AuthFormPanel from "../components/organisms/AuthFormPanel";
 import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuth } from "../context/AuthContext";
 
 export default function Signup() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const signup = useAuthStore((s) => s.signup);
+  const { signup } = useAuth();
   const [form, setForm] = useState({ name: "", identifier: "", password: "" });
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -34,9 +34,6 @@ export default function Signup() {
     }
 
     if (result.needsEmailConfirmation) {
-      // No session yet — the account exists but isn't logged in, so
-      // sending them to a protected route would just bounce them
-      // straight back to /login. Tell them what's actually going on.
       setInfo("Account created! Check your email to confirm it, then log in.");
       return;
     }

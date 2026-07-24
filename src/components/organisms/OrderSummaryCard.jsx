@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Button from "../atoms/Button";
-import { useCartStore } from "../../store/useCartStore";
+import { useCart } from "../../context/CartContext";
 
 export default function OrderSummaryCard({ mode = "cart" }) {
   const { t } = useTranslation();
-  const items = useCartStore((s) => s.items);
-  const subtotal = useCartStore((s) => s.subtotal());
+  const { items, subtotal } = useCart();
 
   if (mode === "checkout") {
     return (

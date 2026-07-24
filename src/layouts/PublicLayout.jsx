@@ -1,11 +1,11 @@
-import { Outlet } from 'react-router-dom'
-import TopAnnouncementBar from '../components/organisms/TopAnnouncementBar'
-import Header from '../components/organisms/Header'
-import Footer from '../components/organisms/Footer'
-import { useAuthStore } from '../store/useAuthStore'
+import { Outlet } from "react-router-dom";
+import TopAnnouncementBar from "../components/organisms/TopAnnouncementBar";
+import Header from "../components/organisms/Header";
+import Footer from "../components/organisms/Footer";
+import { useAuth } from "../context/AuthContext";
 
 export default function PublicLayout() {
-  const user = useAuthStore((s) => s.user)
+  const { user } = useAuth();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -16,5 +16,5 @@ export default function PublicLayout() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }

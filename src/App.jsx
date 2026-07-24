@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { initAuthListener } from "./lib/authListener";
 import PublicLayout from "./layouts/PublicLayout";
 import RequireAuth from "./components/RequireAuth";
 import Home from "./pages/Home";
@@ -14,13 +13,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
-import { useEffect } from "react";
 
 export default function App() {
-  useEffect(() => {
-    const unsubscribe = initAuthListener();
-    return unsubscribe;
-  }, []);
   return (
     <BrowserRouter>
       <Routes>

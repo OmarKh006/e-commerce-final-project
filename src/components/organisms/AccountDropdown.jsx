@@ -7,12 +7,12 @@ import {
   FiStar,
   FiLogOut,
 } from "react-icons/fi";
-import { useAuthStore } from "../../store/useAuthStore";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AccountDropdown({ open, onClose }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const logout = useAuthStore((s) => s.logout);
+  const { logout } = useAuth();
 
   if (!open) return null;
 
@@ -47,15 +47,15 @@ export default function AccountDropdown({ open, onClose }) {
         }}
       >
         <ul className="py-2">
-          {LINKS.map((l) => (
-            <li key={l.label}>
+          {LINKS.map((link) => (
+            <li key={link.label}>
               <Link
-                to={l.to}
+                to={link.to}
                 onClick={onClose}
                 className="flex items-center gap-3 px-4 py-2.5 text-sm hover:text-primary"
               >
                 <l.icon size={16} />
-                {l.label}
+                {link.label}
               </Link>
             </li>
           ))}

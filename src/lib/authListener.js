@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 export function initAuthListener() {
   supabase.auth.getSession().then(({ data: { session } }) => {

@@ -1,19 +1,22 @@
-import { useTranslation } from 'react-i18next'
-import BreadcrumbNav from '../components/molecules/BreadcrumbNav'
-import AccountSidebarNav from '../components/organisms/AccountSidebarNav'
-import ProfileForm from '../components/organisms/ProfileForm'
-import { useAuthStore } from '../store/useAuthStore'
+import { useTranslation } from "react-i18next";
+import BreadcrumbNav from "../components/molecules/BreadcrumbNav";
+import AccountSidebarNav from "../components/organisms/AccountSidebarNav";
+import ProfileForm from "../components/organisms/ProfileForm";
+import { useAuth } from "../context/AuthContext";
 
 export default function Account() {
-  const { t } = useTranslation()
-  const user = useAuthStore((s) => s.user)
+  const { t } = useTranslation();
+  const { user } = useAuth();
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="flex items-center justify-between mb-10">
-        <BreadcrumbNav items={[{ label: 'Home', to: '/' }, { label: 'My Account' }]} />
+        <BreadcrumbNav
+          items={[{ label: "Home", to: "/" }, { label: "My Account" }]}
+        />
         <p className="text-sm">
-          {t('account.welcome')} <span className="text-primary">{user?.name}</span>
+          {t("account.welcome")}{" "}
+          <span className="text-primary">{user?.name}</span>
         </p>
       </div>
 
@@ -22,5 +25,5 @@ export default function Account() {
         <ProfileForm />
       </div>
     </div>
-  )
+  );
 }

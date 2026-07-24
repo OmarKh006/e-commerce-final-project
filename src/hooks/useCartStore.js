@@ -1,7 +1,7 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 function lineKey(productId, color, size) {
-  return `${productId}:${color ?? ''}:${size ?? ''}`
+  return `${productId}:${color ?? ""}:${size ?? ""}`;
 }
 
 export const useCartStore = create(
@@ -11,20 +11,23 @@ export const useCartStore = create(
       couponCode: null,
 
       addItem: (product, qty = 1, color = null, size = null) => {
-        const key = lineKey(product.id, color, size)
+        const key = lineKey(product.id, color, size);
         set((state) => {
-          const existing = state.items.find((i) => i.key === key)
+          const existing = state.items.find((i) => i.key === key);
           if (existing) {
             return {
               items: state.items.map((i) =>
-                i.key === key ? { ...i, qty: i.qty + qty } : i
+                i.key === key ? { ...i, qty: i.qty + qty } : i,
               ),
-            }
+            };
           }
           return {
-            items: [...state.items, { key, productId: product.id, product, qty, color, size }],
-          }
-        })
+            items: [
+              ...state.items,
+              { key, productId: product.id, product, qty, color, size },
+            ],
+          };
+        });
       },
 
       removeItem: (key) =>
@@ -43,8 +46,9 @@ export const useCartStore = create(
 
       count: () => get().items.reduce((sum, i) => sum + i.qty, 0),
 
-      subtotal: () => get().items.reduce((sum, i) => sum + i.product.price * i.qty, 0),
+      subtotal: () =>
+        get().items.reduce((sum, i) => sum + i.product.price * i.qty, 0),
     }),
-    { name: 'exclusive-cart' }
-  )
-)
+    { name: "exclusive-cart" },
+  ),
+);

@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import { useAuthStore } from "../../store/useAuthStore";
+import { useAuth } from "../../context/AuthContext";
 import { useProfile, useUpdateProfile } from "../../hooks/useProfile";
 
 export default function ProfileForm() {
   const { t } = useTranslation();
-  const user = useAuthStore((s) => s.user);
-  const login = useAuthStore((s) => s.login);
-  const updatePassword = useAuthStore((s) => s.updatePassword);
+  const { user, login, updatePassword } = useAuth();
 
   const { data: profile, isLoading: profileLoading } = useProfile(user?.id);
   const updateProfileMutation = useUpdateProfile(user?.id);

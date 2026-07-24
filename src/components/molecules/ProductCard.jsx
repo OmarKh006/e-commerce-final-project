@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Badge from "../atoms/Badge";
 import StarRating from "../atoms/StarRating";
-import { useWishlistStore } from "../../store/useWishlistStore";
-import { useCartStore } from "../../store/useCartStore";
+import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 
 export default function ProductCard({ product }) {
   const { t } = useTranslation();
@@ -24,9 +24,9 @@ export default function ProductCard({ product }) {
     inStock,
   } = product;
 
-  const isWishlisted = useWishlistStore((s) => s.isWishlisted(id));
-  const toggleWishlist = useWishlistStore((s) => s.toggle);
-  const addToCart = useCartStore((s) => s.addItem);
+  const { isWishlisted: isWishlistedFn, toggle: toggleWishlist } = useWishlist();
+  const { addItem: addToCart } = useCart();
+  const isWishlisted = isWishlistedFn(id);
 
   return (
     <div

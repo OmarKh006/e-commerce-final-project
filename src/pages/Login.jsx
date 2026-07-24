@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import AuthFormPanel from "../components/organisms/AuthFormPanel";
 import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const login = useAuthStore((s) => s.login);
+  const { login } = useAuth();
   const [form, setForm] = useState({ identifier: "", password: "" });
   const [error, setError] = useState("");
 
