@@ -15,7 +15,8 @@
     "manage": "Administrar mi cuenta",
     "cancellations": "Mis cancelaciones",
     "reviews": "Mis reseñas",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "myOrder": "mis pedidos"
   },
   "product": {
     "addToCart": "Añadir al carrito",

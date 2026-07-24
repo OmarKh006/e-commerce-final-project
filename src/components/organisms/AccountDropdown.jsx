@@ -54,7 +54,7 @@ export default function AccountDropdown({ open, onClose }) {
                 onClick={onClose}
                 className="flex items-center gap-3 px-4 py-2.5 text-sm hover:text-primary"
               >
-                <l.icon size={16} />
+                <link.icon size={16} />
                 {link.label}
               </Link>
             </li>
