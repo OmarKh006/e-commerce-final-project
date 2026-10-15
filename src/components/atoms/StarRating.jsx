@@ -1,4 +1,5 @@
 import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function StarRating({
   rating = 0,
@@ -7,6 +8,7 @@ export default function StarRating({
   size = 14,
   onChange,
 }) {
+  const { t } = useTranslation();
   const stars = [1, 2, 3, 4, 5];
 
   if (mode === "input") {
@@ -17,7 +19,8 @@ export default function StarRating({
             key={s}
             type="button"
             onClick={() => onChange?.(s)}
-            aria-label={`Rate ${s} star${s > 1 ? "s" : ""}`}
+            aria-label={t("product.rateStars", { n: s })}
+            aria-pressed={s === rating}
             className="cursor-pointer text-star"
           >
             {s <= rating ? (

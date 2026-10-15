@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import HeroBanner from "../components/organisms/HeroBanner";
 import HeroCategorySidebar from "../components/organisms/HeroCategorySidebar";
@@ -14,6 +15,7 @@ import { useProducts, useCategories } from "../hooks/useProducts";
 
 export default function Home() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const {
     data: products,
     isLoading: productsLoading,
@@ -24,7 +26,7 @@ export default function Home() {
   if (productsLoading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-24 text-center text-sm text-body">
-        Loading products…
+        {t("home.loading")}
       </div>
     );
   }
@@ -32,7 +34,7 @@ export default function Home() {
   if (productsError) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-24 text-center text-sm text-error">
-        Something went wrong loading products. Please try again later.
+        {t("home.loadError")}
       </div>
     );
   }
@@ -48,7 +50,10 @@ export default function Home() {
         <FlashSaleSection products={products} endsAt={flashSaleEndsAt} />
       )}
 
-      <CategoryBrowseSection categories={categories || []} />
+      <CategoryBrowseSection
+        categories={categories || []}
+        onSelect={(id) => navigate(`/search?category=${encodeURIComponent(id)}`)}
+      />
 
       {products.length > 0 && (
         <ProductGridSection
@@ -73,7 +78,7 @@ export default function Home() {
           showViewAllButton
         />
       ) : (
-        <p className="text-center text-sm text-body">No products yet.</p>
+        <p className="text-center text-sm text-body">{t("home.noProducts")}</p>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

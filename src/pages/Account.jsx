@@ -12,11 +12,11 @@ export default function Account() {
     <div className="max-w-7xl mx-auto px-4 py-10">
       <div className="flex items-center justify-between mb-10">
         <BreadcrumbNav
-          items={[{ label: "Home", to: "/" }, { label: "My Account" }]}
+          items={[{ label: t("nav.home"), to: "/" }, { label: t("footer.myAccount") }]}
         />
         <p className="text-sm">
           {t("account.welcome")}{" "}
-          <span className="text-primary">{user?.name}</span>
+          <span className="text-primary">{user?.user_metadata?.name || user?.email}</span>
         </p>
       </div>
 

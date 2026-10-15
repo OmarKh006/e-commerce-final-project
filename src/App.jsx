@@ -8,6 +8,7 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Account from "./pages/Account";
+import AccountOrders from "./pages/AccountOrders";
 import Wishlist from "./pages/Wishlist";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -21,14 +22,8 @@ export default function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
-          <Route
-            path="/cart"
-            element={
-              <RequireAuth>
-                <Cart />
-              </RequireAuth>
-            }
-          />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -41,10 +36,10 @@ export default function App() {
             }
           />
           <Route
-            path="/wishlist"
+            path="/account/orders"
             element={
               <RequireAuth>
-                <Wishlist />
+                <AccountOrders />
               </RequireAuth>
             }
           />

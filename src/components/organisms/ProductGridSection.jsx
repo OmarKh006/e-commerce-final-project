@@ -20,7 +20,7 @@ export default function ProductGridSection({
           <h2 className="font-heading text-2xl font-semibold">{title}</h2>
         </div>
         {!showViewAllButton && (
-          <Link to="#" className="hidden md:block">
+          <Link to="/search" className="hidden md:block">
             <Button variant="primary" size="sm">
               {t("home.viewAll")}
             </Button>
@@ -36,7 +36,7 @@ export default function ProductGridSection({
 
       {showViewAllButton && (
         <div className="flex justify-center mt-10">
-          <Button as={Link} to="#" variant="primary" size="lg">
+          <Button as={Link} to="/search" variant="primary" size="lg">
             {t("home.viewAllProducts")}
           </Button>
         </div>

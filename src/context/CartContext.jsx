@@ -7,10 +7,19 @@ import {
   useState,
 } from "react";
 
+import { round2 } from "../lib/format";
+
 const STORAGE_KEY = "exclusive-cart";
+
+// Demo coupon codes (percentage off the subtotal).
+export const COUPONS = { EXCLUSIVE10: 10 };
 
 function lineKey(productId, color, size) {
   return `${productId}:${color ?? ""}:${size ?? ""}`;
+}
+
+function validCoupon(code) {
+  return code && COUPONS[code] ? code : null;
 }
 
 function loadPersistedState() {
@@ -23,7 +32,7 @@ function loadPersistedState() {
     const parsed = JSON.parse(raw);
     return {
       items: parsed.state?.items ?? [],
-      couponCode: parsed.state?.couponCode ?? null,
+      couponCode: validCoupon(parsed.state?.couponCode),
     };
   } catch {
     return { items: [], couponCode: null };
@@ -77,7 +86,16 @@ export function CartProvider({ children }) {
     );
   }, []);
 
-  const applyCoupon = useCallback((code) => setCouponCode(code || null), []);
+  const applyCoupon = useCallback((raw) => {
+    const code = String(raw ?? "").trim().toUpperCase();
+    if (!code) {
+      setCouponCode(null);
+      return { ok: true, cleared: true };
+    }
+    if (!COUPONS[code]) return { ok: false };
+    setCouponCode(code);
+    return { ok: true, code, pct: COUPONS[code] };
+  }, []);
 
   const clear = useCallback(() => {
     setItems([]);
@@ -90,9 +108,16 @@ export function CartProvider({ children }) {
   );
 
   const subtotal = useMemo(
-    () => items.reduce((sum, i) => sum + i.product.price * i.qty, 0),
+    () => round2(items.reduce((sum, i) => sum + i.product.price * i.qty, 0)),
     [items],
   );
+
+  const discount = useMemo(
+    () => (couponCode ? round2((subtotal * COUPONS[couponCode]) / 100) : 0),
+    [subtotal, couponCode],
+  );
+
+  const total = useMemo(() => round2(subtotal - discount), [subtotal, discount]);
 
   const value = useMemo(
     () => ({
@@ -105,6 +130,8 @@ export function CartProvider({ children }) {
       clear,
       count,
       subtotal,
+      discount,
+      total,
     }),
     [
       items,
@@ -116,6 +143,8 @@ export function CartProvider({ children }) {
       clear,
       count,
       subtotal,
+      discount,
+      total,
     ],
   );
 

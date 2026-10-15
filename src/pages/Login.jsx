@@ -6,39 +6,62 @@ import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
 import { useAuth } from "../context/AuthContext";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Login() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
-  const [form, setForm] = useState({ identifier: "", password: "" });
-  const [error, setError] = useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.identifier || !form.password) {
-      setError("Please fill in both fields.");
-      return;
+    if (submitting) return;
+    setFormError("");
+
+    const found = {};
+    const email = form.email.trim();
+    if (!email) found.email = t("auth.errors.emailRequired");
+    else if (!EMAIL_RE.test(email)) found.email = t("auth.errors.emailInvalid");
+    if (!form.password) found.password = t("auth.errors.passwordRequired");
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
+
+    setSubmitting(true);
+    try {
+      const result = await login(email, form.password);
+      if (!result.success) {
+        setFormError(
+          result.error.code === "invalid_credentials"
+            ? t("auth.errors.invalidCredentials")
+            : result.error.message || t("auth.errors.generic"),
+        );
+        return;
+      }
+      navigate(location.state?.from?.pathname || "/account", { replace: true });
+    } catch {
+      setFormError(t("auth.errors.generic"));
+    } finally {
+      setSubmitting(false);
     }
-
-    const result = await login(form.identifier, form.password);
-
-    if (!result.success) {
-      setError(result.error.message);
-      return;
-    }
-
-    const redirectTo = location.state?.from?.pathname || "/account";
-    navigate(redirectTo, { replace: true });
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4">
       <AuthFormPanel>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form
+          data-testid="login-form"
+          onSubmit={handleSubmit}
+          noValidate
+          className="flex flex-col gap-6"
+        >
           <div>
             <h1 className="font-heading text-3xl font-medium mb-3">
               {t("auth.loginTitle")}
@@ -48,25 +71,36 @@ export default function Login() {
 
           <Input
             variant="underline"
-            name="identifier"
-            placeholder={t("auth.emailOrPhone")}
-            value={form.identifier}
+            type="email"
+            name="email"
+            autoComplete="email"
+            aria-label={t("auth.email")}
+            placeholder={t("auth.email")}
+            value={form.email}
             onChange={handleChange}
+            error={errors.email}
           />
           <Input
             variant="underline"
             type="password"
             name="password"
+            autoComplete="current-password"
+            aria-label={t("auth.password")}
             placeholder={t("auth.password")}
             value={form.password}
             onChange={handleChange}
+            error={errors.password}
           />
 
-          {error && <p className="text-xs text-error">{error}</p>}
+          {formError && (
+            <p role="alert" className="text-xs text-error">
+              {formError}
+            </p>
+          )}
 
           <div className="flex items-center gap-10">
-            <Button type="submit" variant="primary" size="lg">
-              {t("auth.login")}
+            <Button type="submit" variant="primary" size="lg" disabled={submitting}>
+              {submitting ? t("auth.submitting") : t("auth.login")}
             </Button>
             <Link to="#" className="text-sm text-primary">
               {t("auth.forgotPassword")}

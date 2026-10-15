@@ -1,45 +1,37 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FiChevronDown } from 'react-icons/fi'
-
-const LANGUAGES = [
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-]
+import { LANGUAGES } from '../../lib/i18n'
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation()
-  const [open, setOpen] = useState(false)
-  const current = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0]
+  const { t, i18n } = useTranslation()
+  const current = i18n.resolvedLanguage || i18n.language
 
-  const handleSelect = (code) => {
+  const handleChange = (e) => {
+    const code = e.target.value
     i18n.changeLanguage(code)
-    localStorage.setItem('lang', code)
-    setOpen(false)
+    try {
+      localStorage.setItem('lang', code)
+    } catch {
+      // storage unavailable: language still changes for this session
+    }
   }
 
   return (
-    <div className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1 text-xs text-white cursor-pointer"
+    <div className="relative flex items-center">
+      <select
+        data-testid="lang-switch"
+        aria-label={t('common.language')}
+        value={current}
+        onChange={handleChange}
+        className="appearance-none bg-transparent text-xs text-white pr-4 cursor-pointer outline-none focus-visible:underline"
       >
-        {current.label} <FiChevronDown size={12} />
-      </button>
-      {open && (
-        <div className="absolute right-0 mt-2 w-28 bg-white text-ink rounded-sm shadow-card-hover z-20 overflow-hidden">
-          {LANGUAGES.map((l) => (
-            <button
-              key={l.code}
-              onClick={() => handleSelect(l.code)}
-              className="w-full text-left px-3 py-2 text-xs hover:bg-secondary-gray cursor-pointer"
-            >
-              {l.label}
-            </button>
-          ))}
-        </div>
-      )}
+        {LANGUAGES.map((l) => (
+          <option key={l.code} value={l.code} className="text-black">
+            {l.label}
+          </option>
+        ))}
+      </select>
+      <FiChevronDown size={12} className="pointer-events-none absolute right-0 text-white" />
     </div>
   )
 }

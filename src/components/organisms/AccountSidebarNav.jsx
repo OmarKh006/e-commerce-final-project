@@ -9,15 +9,15 @@ export default function AccountSidebarNav({ active = 'profile' }) {
       title: t('account.manageAccount'),
       items: [
         { key: 'profile', label: t('account.myProfile'), to: '/account' },
-        { key: 'address', label: t('account.addressBook'), to: '/account/address' },
-        { key: 'payment', label: t('account.paymentOptions'), to: '/account/payment' },
+        { key: 'address', label: t('account.addressBook'), to: '/account' },
+        { key: 'payment', label: t('account.paymentOptions'), to: '/account' },
       ],
     },
     {
       title: t('account.myOrders'),
       items: [
-        { key: 'returns', label: t('account.myReturns'), to: '/account/returns' },
-        { key: 'cancellations', label: t('account.myCancellations'), to: '/account/cancellations' },
+        { key: 'returns', label: t('account.myReturns'), to: '/account' },
+        { key: 'cancellations', label: t('account.myCancellations'), to: '/account' },
       ],
     },
     {

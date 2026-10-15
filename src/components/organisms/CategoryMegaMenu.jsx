@@ -15,7 +15,8 @@ export default function CategoryMegaMenu({ open, onClose }) {
         {categories.map((c) => (
           <li key={c.id}>
             <Link
-              to="#"
+              to={`/search?category=${encodeURIComponent(c.id)}`}
+              onClick={onClose}
               className="flex items-center justify-between px-4 py-2.5 text-sm text-ink hover:bg-secondary-gray hover:text-primary"
             >
               {c.name}

@@ -52,6 +52,11 @@ export function AuthProvider({ children }) {
 
     if (error) return { success: false, error };
 
+    // With email confirmation on, Supabase hides duplicates by returning a user with no identities.
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      return { success: false, error: { code: "user_already_exists", message: "User already registered" } };
+    }
+
     return { success: true, data, needsEmailConfirmation: !data.session };
   }, []);
 

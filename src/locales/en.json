@@ -9,7 +9,16 @@
     "contact": "Contact",
     "about": "About",
     "signup": "Sign Up",
-    "searchPlaceholder": "What are you looking for?"
+    "searchPlaceholder": "What are you looking for?",
+    "account": "Account",
+    "product": "Product",
+    "searchLabel": "Search products",
+    "search": "Search",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "logout": "Log out",
+    "wishlist": "Wishlist",
+    "cart": "Cart"
   },
   "accountMenu": {
     "manage": "Manage My Account",
@@ -30,7 +39,25 @@
     "freeDeliveryDesc": "Enter your postal code for Delivery Availability",
     "returnDelivery": "Return Delivery",
     "returnDeliveryDesc": "Free 30 Days Delivery Returns.",
-    "relatedItem": "Related Item"
+    "relatedItem": "Related Item",
+    "loading": "Loading product…",
+    "notFound": "Product not found.",
+    "backHome": "Back to home",
+    "toggleWishlist": "Toggle wishlist",
+    "reviewsTitle": "Customer Reviews",
+    "writeReview": "Write a review",
+    "yourRating": "Your rating",
+    "yourReview": "Your review",
+    "reviewPlaceholder": "Share your thoughts about this product…",
+    "submitReview": "Submit Review",
+    "noReviews": "No reviews yet. Be the first to review this product.",
+    "reviewTooShort": "Please write at least 5 characters.",
+    "reviewTooLong": "Reviews are limited to 1000 characters.",
+    "reviewDuplicate": "You have already posted this review.",
+    "reviewSaved": "Thanks! Your review was added.",
+    "reviewStorageError": "Your review could not be saved in this browser.",
+    "guest": "Guest",
+    "rateStars": "Rate {{n}} out of 5"
   },
   "home": {
     "flashSales": "Flash Sales",
@@ -45,7 +72,10 @@
     "viewAllProducts": "View All Products",
     "musicExperience": "Enhance Your Music Experience",
     "newArrival": "New Arrival",
-    "featured": "Featured"
+    "featured": "Featured",
+    "loading": "Loading products…",
+    "loadError": "Something went wrong loading products. Please try again later.",
+    "noProducts": "No products yet."
   },
   "cart": {
     "title": "Cart",
@@ -61,7 +91,16 @@
     "shipping": "Shipping",
     "free": "Free",
     "total": "Total",
-    "proceedToCheckout": "Proceed to checkout"
+    "proceedToCheckout": "Proceed to checkout",
+    "empty": "Your cart is empty.",
+    "remove": "Remove item",
+    "discount": "Discount",
+    "couponApplied": "Coupon {{code}} applied ({{pct}}% off).",
+    "couponInvalid": "This coupon code is not valid.",
+    "couponRemoved": "Coupon removed.",
+    "viewCart": "View Cart",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity"
   },
   "checkout": {
     "title": "Billing Details",
@@ -76,12 +115,25 @@
     "bank": "Bank",
     "cashOnDelivery": "Cash on delivery",
     "placeOrder": "Place Order",
-    "demoNotice": "Demo mode — no real charge will be made"
+    "demoNotice": "Demo mode — no real charge will be made",
+    "breadcrumb": "CheckOut",
+    "emptyCart": "Your cart is empty — nothing to check out.",
+    "orderPlacedTitle": "Order placed!",
+    "orderPlacedMsg": "Thanks — your order has been received.",
+    "orderNumber": "Order number: {{id}}",
+    "orderTotal": "Total: {{total}}",
+    "continueShopping": "Continue Shopping",
+    "placing": "Placing order…",
+    "errors": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address.",
+      "phone": "Enter a valid phone number (7–15 digits)."
+    }
   },
   "auth": {
     "loginTitle": "Log in to Exclusive",
     "loginSubtitle": "Enter your details below",
-    "emailOrPhone": "Email or Phone Number",
+    "emailOrPhone": "Email",
     "password": "Password",
     "login": "Log In",
     "forgotPassword": "Forget Password?",
@@ -90,7 +142,21 @@
     "name": "Name",
     "createAccount": "Create Account",
     "signupWithGoogle": "Sign up with Google",
-    "alreadyHaveAccount": "Already have account?"
+    "alreadyHaveAccount": "Already have account?",
+    "email": "Email",
+    "errors": {
+      "fillAll": "Please fill in all fields.",
+      "nameRequired": "Please enter your name.",
+      "emailRequired": "Please enter your email.",
+      "emailInvalid": "Enter a valid email address.",
+      "passwordRequired": "Please enter your password.",
+      "passwordShort": "Password must be at least 6 characters.",
+      "emailExists": "An account with this email already exists.",
+      "invalidCredentials": "Incorrect email or password.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "confirmEmail": "Account created! Check your email to confirm it, then log in.",
+    "submitting": "Please wait…"
   },
   "account": {
     "manageAccount": "Manage My Account",
@@ -111,13 +177,27 @@
     "newPassword": "New Password",
     "confirmNewPassword": "Confirm New Password",
     "cancel": "Cancel",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "loading": "Loading profile…",
+    "firstName": "First Name",
+    "addAddress": "Add your address",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "pwFillAll": "Fill in all three password fields to change your password.",
+    "pwMismatch": "New password and confirmation do not match.",
+    "pwIncorrect": "Current password is incorrect.",
+    "ordersTitle": "My Orders",
+    "noOrders": "You haven't placed any orders yet.",
+    "orderItems": "{{n}} item(s)"
   },
   "wishlist": {
     "title": "Wishlist",
     "moveAllToBag": "Move All To Bag",
     "justForYou": "Just For You",
-    "seeAll": "See All"
+    "seeAll": "See All",
+    "loading": "Loading your wishlist…",
+    "loadError": "Couldn't load your wishlist. Please try again later.",
+    "empty": "Your wishlist is empty."
   },
   "about": {
     "ourStory": "Our Story",
@@ -135,7 +215,12 @@
     "yourEmail": "Your Email",
     "yourPhone": "Your Phone",
     "yourMessage": "Your Massage",
-    "sendMessage": "Send Massage"
+    "sendMessage": "Send Massage",
+    "formName": "Please enter your name.",
+    "formEmail": "Enter a valid email address.",
+    "formPhone": "Please enter your phone number.",
+    "formMessage": "Please write a message.",
+    "sentDemo": "Thanks! Your message was recorded. (Demo site: messages are not actually delivered.)"
   },
   "notFound": {
     "breadcrumb": "404 Error",
@@ -185,5 +270,18 @@
     "babysToys": "Baby's & Toys",
     "groceriesPets": "Groceries & Pets",
     "healthBeauty": "Health & Beauty"
+  },
+  "common": {
+    "loading": "Loading…",
+    "language": "Language"
+  },
+  "search": {
+    "title": "Search results",
+    "allProducts": "All products",
+    "categoryResults": "Category: {{name}}",
+    "resultsFor": "Results for “{{query}}”",
+    "resultsCount": "{{total}} product(s) found",
+    "noResults": "No products match “{{query}}”. Try a different search.",
+    "backHome": "Back to home"
   }
 }

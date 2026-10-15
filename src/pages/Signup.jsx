@@ -7,44 +7,73 @@ import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
 import { useAuth } from "../context/AuthContext";
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Signup() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { signup } = useAuth();
-  const [form, setForm] = useState({ name: "", identifier: "", password: "" });
-  const [error, setError] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState("");
   const [info, setInfo] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    if (submitting) return;
+    setFormError("");
     setInfo("");
-    if (!form.name || !form.identifier || !form.password) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    const result = await signup(form.name, form.identifier, form.password);
 
-    if (!result.success) {
-      setError(result.error.message);
-      return;
-    }
+    const found = {};
+    const email = form.email.trim();
+    if (!form.name.trim()) found.name = t("auth.errors.nameRequired");
+    if (!email) found.email = t("auth.errors.emailRequired");
+    else if (!EMAIL_RE.test(email)) found.email = t("auth.errors.emailInvalid");
+    if (!form.password) found.password = t("auth.errors.passwordRequired");
+    else if (form.password.length < 6) found.password = t("auth.errors.passwordShort");
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
 
-    if (result.needsEmailConfirmation) {
-      setInfo("Account created! Check your email to confirm it, then log in.");
-      return;
-    }
+    setSubmitting(true);
+    try {
+      const result = await signup(form.name.trim(), email, form.password);
 
-    navigate("/account", { replace: true });
+      if (!result.success) {
+        const code = result.error.code;
+        setFormError(
+          code === "user_already_exists" || code === "email_exists"
+            ? t("auth.errors.emailExists")
+            : result.error.message || t("auth.errors.generic"),
+        );
+        return;
+      }
+
+      if (result.needsEmailConfirmation) {
+        setInfo(t("auth.confirmEmail"));
+        return;
+      }
+
+      navigate("/account", { replace: true });
+    } catch {
+      setFormError(t("auth.errors.generic"));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4">
       <AuthFormPanel>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        <form
+          data-testid="signup-form"
+          onSubmit={handleSubmit}
+          noValidate
+          className="flex flex-col gap-6"
+        >
           <div>
             <h1 className="font-heading text-3xl font-medium mb-3">
               {t("auth.signupTitle")}
@@ -55,31 +84,55 @@ export default function Signup() {
           <Input
             variant="underline"
             name="name"
+            autoComplete="name"
+            aria-label={t("auth.name")}
             placeholder={t("auth.name")}
             value={form.name}
             onChange={handleChange}
+            error={errors.name}
           />
           <Input
             variant="underline"
-            name="identifier"
-            placeholder={t("auth.emailOrPhone")}
-            value={form.identifier}
+            type="email"
+            name="email"
+            autoComplete="email"
+            aria-label={t("auth.email")}
+            placeholder={t("auth.email")}
+            value={form.email}
             onChange={handleChange}
+            error={errors.email}
           />
           <Input
             variant="underline"
             type="password"
             name="password"
+            autoComplete="new-password"
+            aria-label={t("auth.password")}
             placeholder={t("auth.password")}
             value={form.password}
             onChange={handleChange}
+            error={errors.password}
           />
 
-          {error && <p className="text-xs text-error">{error}</p>}
-          {info && <p className="text-xs text-success">{info}</p>}
+          {formError && (
+            <p role="alert" className="text-xs text-error">
+              {formError}
+            </p>
+          )}
+          {info && (
+            <p role="status" className="text-xs text-success">
+              {info}
+            </p>
+          )}
 
-          <Button type="submit" variant="primary" size="lg" className="w-full">
-            {t("auth.createAccount")}
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="w-full"
+            disabled={submitting}
+          >
+            {submitting ? t("auth.submitting") : t("auth.createAccount")}
           </Button>
 
           <Button

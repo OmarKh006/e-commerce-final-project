@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FiHeart, FiEye, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,6 @@ import { useCart } from "../../context/CartContext";
 
 export default function ProductCard({ product }) {
   const { t } = useTranslation();
-  const [hovered, setHovered] = useState(false);
   const {
     id,
     title,
@@ -29,11 +27,7 @@ export default function ProductCard({ product }) {
   const isWishlisted = isWishlistedFn(id);
 
   return (
-    <div
-      className="group w-full"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <div className="group w-full" data-testid="product-card" data-product-id={id}>
       <div className="relative bg-secondary-gray rounded-sm overflow-hidden aspect-square">
         {badge === "sale" && discountPct && (
           <Badge variant="sale" className="absolute top-3 left-3 z-10">
@@ -49,7 +43,9 @@ export default function ProductCard({ product }) {
         <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
           <button
             type="button"
-            aria-label="Toggle wishlist"
+            data-testid="add-to-wishlist"
+            aria-label={t("product.toggleWishlist")}
+            aria-pressed={isWishlisted}
             onClick={() => toggleWishlist(id)}
             className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:text-primary cursor-pointer"
           >
@@ -62,37 +58,39 @@ export default function ProductCard({ product }) {
           </button>
           <Link
             to={`/product/${id}`}
-            aria-label="Quick view"
+            aria-label={title}
             className="w-8 h-8 rounded-full bg-white flex items-center justify-center hover:text-primary cursor-pointer"
           >
             <FiEye className="text-ink" size={16} />
           </Link>
         </div>
 
-        <Link to={`/product/${id}`}>
+        <Link to={`/product/${id}`} tabIndex={-1} aria-hidden="true">
           <img
             src={image}
-            alt={title}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            alt=""
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[80%] max-h-[80%] object-contain"
           />
         </Link>
 
-        {(hovered || !inStock) && (
-          <button
-            type="button"
-            disabled={!inStock}
-            onClick={() => addToCart(product, 1)}
-            className="absolute bottom-0 left-0 right-0 bg-black text-white text-sm py-2.5 flex items-center justify-center gap-2 disabled:bg-body disabled:cursor-not-allowed cursor-pointer"
-          >
-            <FiShoppingCart size={14} />
-            {inStock ? t("product.addToCart") : t("product.outOfStock")}
-          </button>
-        )}
+        {/* Always in the DOM (so it is reachable by keyboard and touch);
+            on desktop it fades in on hover or focus, matching the design. */}
+        <button
+          type="button"
+          data-testid="add-to-cart"
+          disabled={!inStock}
+          onClick={() => addToCart(product, 1)}
+          className="absolute bottom-0 left-0 right-0 bg-black text-white text-sm py-2.5 flex items-center justify-center gap-2 disabled:bg-body disabled:cursor-not-allowed cursor-pointer transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100 md:group-focus-within:opacity-100 disabled:opacity-100"
+        >
+          <FiShoppingCart size={14} />
+          {inStock ? t("product.addToCart") : t("product.outOfStock")}
+        </button>
       </div>
 
       <div className="mt-3">
         <Link
           to={`/product/${id}`}
+          data-testid="product-link"
           className="font-heading text-sm font-medium text-ink hover:text-primary"
         >
           {title}

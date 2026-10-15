@@ -14,7 +14,7 @@ export default function Cart() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
       <BreadcrumbNav
-        items={[{ label: "Home", to: "/" }, { label: t("cart.title") }]}
+        items={[{ label: t("nav.home"), to: "/" }, { label: t("cart.title") }]}
       />
 
       <div className="mt-8">

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FiChevronRight } from "react-icons/fi";
 export default function BreadcrumbNav({ items }) {
   return (
-    <nav className="flex items-center gap-2 text-sm text-body">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-body flex-wrap">
       {items.map((item, i) => {
         const isLast = i === items.length - 1;
         return (

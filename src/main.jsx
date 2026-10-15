@@ -6,6 +6,12 @@ import './lib/i18n'
 import App from './App.jsx'
 import AppProviders from './context/AppProviders.jsx'
 
+// Support hash-style URLs (e.g. /#/cart) by rewriting them to the real path
+// before the router starts. Standard paths keep working unchanged.
+if (window.location.hash.startsWith('#/')) {
+  window.history.replaceState(null, '', window.location.hash.slice(1))
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

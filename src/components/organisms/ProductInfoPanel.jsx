@@ -69,14 +69,18 @@ export default function ProductInfoPanel({ product }) {
         <Button
           variant="primary"
           size="lg"
+          data-testid="add-to-cart"
           onClick={handleBuyNow}
           disabled={!product.inStock}
         >
           {t("product.buyNow")}
         </Button>
         <button
+          type="button"
+          data-testid="add-to-wishlist"
           onClick={() => toggleWishlist(product.id)}
-          aria-label="Toggle wishlist"
+          aria-label={t("product.toggleWishlist")}
+          aria-pressed={isWishlisted}
           className="w-11 h-11 border border-line rounded-sm flex items-center justify-center cursor-pointer"
         >
           <FiHeart

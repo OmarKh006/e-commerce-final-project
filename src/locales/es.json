@@ -9,7 +9,16 @@
     "contact": "Contacto",
     "about": "Nosotros",
     "signup": "Registrarse",
-    "searchPlaceholder": "¿Qué estás buscando?"
+    "searchPlaceholder": "¿Qué estás buscando?",
+    "account": "Cuenta",
+    "product": "Producto",
+    "searchLabel": "Buscar productos",
+    "search": "Buscar",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "logout": "Cerrar sesión",
+    "wishlist": "Lista de deseos",
+    "cart": "Carrito"
   },
   "accountMenu": {
     "manage": "Administrar mi cuenta",
@@ -30,7 +39,25 @@
     "freeDeliveryDesc": "Ingresa tu código postal para ver disponibilidad de envío",
     "returnDelivery": "Devolución gratuita",
     "returnDeliveryDesc": "Devoluciones gratuitas en 30 días.",
-    "relatedItem": "Productos relacionados"
+    "relatedItem": "Productos relacionados",
+    "loading": "Cargando producto…",
+    "notFound": "Producto no encontrado.",
+    "backHome": "Volver al inicio",
+    "toggleWishlist": "Añadir o quitar de la lista de deseos",
+    "reviewsTitle": "Opiniones de clientes",
+    "writeReview": "Escribe una opinión",
+    "yourRating": "Tu valoración",
+    "yourReview": "Tu opinión",
+    "reviewPlaceholder": "Cuéntanos qué piensas de este producto…",
+    "submitReview": "Enviar opinión",
+    "noReviews": "Aún no hay opiniones. Sé el primero en opinar sobre este producto.",
+    "reviewTooShort": "Escribe al menos 5 caracteres.",
+    "reviewTooLong": "Las opiniones están limitadas a 1000 caracteres.",
+    "reviewDuplicate": "Ya has publicado esta opinión.",
+    "reviewSaved": "¡Gracias! Tu opinión fue añadida.",
+    "reviewStorageError": "No se pudo guardar tu opinión en este navegador.",
+    "guest": "Invitado",
+    "rateStars": "Valorar {{n}} de 5"
   },
   "home": {
     "flashSales": "Ofertas relámpago",
@@ -45,7 +72,10 @@
     "viewAllProducts": "Ver todos los productos",
     "musicExperience": "Mejora tu experiencia musical",
     "newArrival": "Nuevos productos",
-    "featured": "Destacado"
+    "featured": "Destacado",
+    "loading": "Cargando productos…",
+    "loadError": "Algo salió mal al cargar los productos. Inténtalo más tarde.",
+    "noProducts": "Aún no hay productos."
   },
   "cart": {
     "title": "Carrito",
@@ -61,7 +91,16 @@
     "shipping": "Envío",
     "free": "Gratis",
     "total": "Total",
-    "proceedToCheckout": "Proceder al pago"
+    "proceedToCheckout": "Proceder al pago",
+    "empty": "Tu carrito está vacío.",
+    "remove": "Eliminar artículo",
+    "discount": "Descuento",
+    "couponApplied": "Cupón {{code}} aplicado ({{pct}}% de descuento).",
+    "couponInvalid": "Este código de cupón no es válido.",
+    "couponRemoved": "Cupón eliminado.",
+    "viewCart": "Ver carrito",
+    "increase": "Aumentar cantidad",
+    "decrease": "Disminuir cantidad"
   },
   "checkout": {
     "title": "Datos de facturación",
@@ -76,12 +115,25 @@
     "bank": "Banco",
     "cashOnDelivery": "Pago contra entrega",
     "placeOrder": "Realizar pedido",
-    "demoNotice": "Modo demo — no se realizará ningún cargo real"
+    "demoNotice": "Modo demo — no se realizará ningún cargo real",
+    "breadcrumb": "Pago",
+    "emptyCart": "Tu carrito está vacío: no hay nada que pagar.",
+    "orderPlacedTitle": "¡Pedido realizado!",
+    "orderPlacedMsg": "Gracias: hemos recibido tu pedido.",
+    "orderNumber": "Número de pedido: {{id}}",
+    "orderTotal": "Total: {{total}}",
+    "continueShopping": "Seguir comprando",
+    "placing": "Realizando pedido…",
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "email": "Introduce un correo electrónico válido.",
+      "phone": "Introduce un teléfono válido (7–15 dígitos)."
+    }
   },
   "auth": {
     "loginTitle": "Inicia sesión en Exclusive",
     "loginSubtitle": "Ingresa tus datos a continuación",
-    "emailOrPhone": "Correo o número de teléfono",
+    "emailOrPhone": "Correo electrónico",
     "password": "Contraseña",
     "login": "Iniciar sesión",
     "forgotPassword": "¿Olvidaste tu contraseña?",
@@ -90,7 +142,21 @@
     "name": "Nombre",
     "createAccount": "Crear cuenta",
     "signupWithGoogle": "Registrarse con Google",
-    "alreadyHaveAccount": "¿Ya tienes una cuenta?"
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "email": "Correo electrónico",
+    "errors": {
+      "fillAll": "Por favor, completa todos los campos.",
+      "nameRequired": "Por favor, introduce tu nombre.",
+      "emailRequired": "Por favor, introduce tu correo.",
+      "emailInvalid": "Introduce un correo electrónico válido.",
+      "passwordRequired": "Por favor, introduce tu contraseña.",
+      "passwordShort": "La contraseña debe tener al menos 6 caracteres.",
+      "emailExists": "Ya existe una cuenta con este correo.",
+      "invalidCredentials": "Correo o contraseña incorrectos.",
+      "generic": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "confirmEmail": "¡Cuenta creada! Revisa tu correo para confirmarla y luego inicia sesión.",
+    "submitting": "Espera…"
   },
   "account": {
     "manageAccount": "Administrar mi cuenta",
@@ -111,13 +177,27 @@
     "newPassword": "Nueva contraseña",
     "confirmNewPassword": "Confirmar nueva contraseña",
     "cancel": "Cancelar",
-    "saveChanges": "Guardar cambios"
+    "saveChanges": "Guardar cambios",
+    "loading": "Cargando perfil…",
+    "firstName": "Nombre",
+    "addAddress": "Añade tu dirección",
+    "saving": "Guardando…",
+    "saved": "Cambios guardados.",
+    "pwFillAll": "Completa los tres campos de contraseña para cambiarla.",
+    "pwMismatch": "La nueva contraseña y su confirmación no coinciden.",
+    "pwIncorrect": "La contraseña actual es incorrecta.",
+    "ordersTitle": "Mis pedidos",
+    "noOrders": "Aún no has realizado ningún pedido.",
+    "orderItems": "{{n}} artículo(s)"
   },
   "wishlist": {
     "title": "Lista de deseos",
     "moveAllToBag": "Mover todo al carrito",
     "justForYou": "Solo para ti",
-    "seeAll": "Ver todo"
+    "seeAll": "Ver todo",
+    "loading": "Cargando tu lista de deseos…",
+    "loadError": "No se pudo cargar tu lista de deseos. Inténtalo más tarde.",
+    "empty": "Tu lista de deseos está vacía."
   },
   "about": {
     "ourStory": "Nuestra historia",
@@ -135,7 +215,12 @@
     "yourEmail": "Tu correo electrónico",
     "yourPhone": "Tu teléfono",
     "yourMessage": "Tu mensaje",
-    "sendMessage": "Enviar mensaje"
+    "sendMessage": "Enviar mensaje",
+    "formName": "Por favor, introduce tu nombre.",
+    "formEmail": "Introduce un correo electrónico válido.",
+    "formPhone": "Por favor, introduce tu teléfono.",
+    "formMessage": "Por favor, escribe un mensaje.",
+    "sentDemo": "¡Gracias! Tu mensaje fue registrado. (Sitio de demostración: los mensajes no se envían realmente.)"
   },
   "notFound": {
     "breadcrumb": "Error 404",
@@ -185,5 +270,18 @@
     "babysToys": "Bebés y juguetes",
     "groceriesPets": "Abarrotes y mascotas",
     "healthBeauty": "Salud y belleza"
+  },
+  "common": {
+    "loading": "Cargando…",
+    "language": "Idioma"
+  },
+  "search": {
+    "title": "Resultados de búsqueda",
+    "allProducts": "Todos los productos",
+    "categoryResults": "Categoría: {{name}}",
+    "resultsFor": "Resultados para “{{query}}”",
+    "resultsCount": "{{total}} producto(s) encontrado(s)",
+    "noResults": "Ningún producto coincide con “{{query}}”. Prueba con otra búsqueda.",
+    "backHome": "Volver al inicio"
   }
 }

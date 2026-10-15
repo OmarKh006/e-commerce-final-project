@@ -31,10 +31,10 @@ export default function AccountDropdown({ open, onClose }) {
     },
     {
       label: t("accountMenu.cancellations"),
-      to: "/account/cancellations",
+      to: "/account",
       icon: FiXCircle,
     },
-    { label: t("accountMenu.reviews"), to: "/account/reviews", icon: FiStar },
+    { label: t("accountMenu.reviews"), to: "/account", icon: FiStar },
   ];
 
   return (

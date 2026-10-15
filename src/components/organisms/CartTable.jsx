@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import QuantityStepper from "../molecules/QuantityStepper";
 import Button from "../atoms/Button";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../lib/format";
 
 export default function CartTable() {
   const { t } = useTranslation();
@@ -11,8 +12,8 @@ export default function CartTable() {
 
   if (items.length === 0) {
     return (
-      <div className="text-center py-24">
-        <p className="text-body text-sm mb-6">Your cart is empty.</p>
+      <div className="text-center py-24" data-testid="cart-empty">
+        <p className="text-body text-sm mb-6">{t("cart.empty")}</p>
         <Button as={Link} to="/" variant="primary">
           {t("cart.returnToShop")}
         </Button>
@@ -33,26 +34,32 @@ export default function CartTable() {
       {items.map((item) => (
         <div
           key={item.key}
-          className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-4 items-center px-8 py-6 border-b border-line last:border-b-0"
+          data-testid="cart-item"
+          data-product-id={item.productId}
+          className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr_auto] gap-4 items-center px-4 sm:px-8 py-6 border-b border-line last:border-b-0"
         >
           <div className="flex items-center gap-4 col-span-2 md:col-span-1">
             <img
               src={item.product.image}
-              alt={item.product.title}
-              className="w-14 h-14 object-cover rounded-sm bg-secondary-gray"
+              alt=""
+              className="w-14 h-14 object-contain rounded-sm bg-secondary-gray"
             />
             <span className="text-sm">{item.product.title}</span>
           </div>
-          <span className="text-sm">${item.product.price}</span>
+          <span className="text-sm">{formatPrice(item.product.price)}</span>
           <QuantityStepper
             size="sm"
             value={item.qty}
             onChange={(qty) => updateQty(item.key, qty)}
           />
-          <span className="text-sm">${item.product.price * item.qty}</span>
+          <span className="text-sm">
+            {formatPrice(item.product.price * item.qty)}
+          </span>
           <button
+            type="button"
+            data-testid="remove-from-cart"
             onClick={() => removeItem(item.key)}
-            aria-label="Remove item"
+            aria-label={`${t("cart.remove")}: ${item.product.title}`}
             className="text-body hover:text-error cursor-pointer justify-self-end"
           >
             <FiX size={18} />

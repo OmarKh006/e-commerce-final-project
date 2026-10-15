@@ -63,17 +63,17 @@ export default function ProfileForm() {
 
     if (wantsPasswordChange) {
       if (!form.currentPassword || !form.newPassword || !form.confirmPassword) {
-        setError("Fill in all three password fields to change your password.");
+        setError(t("account.pwFillAll"));
         return;
       }
       if (form.newPassword !== form.confirmPassword) {
-        setError("New password and confirmation do not match.");
+        setError(t("account.pwMismatch"));
         return;
       }
 
       const verify = await login(form.email, form.currentPassword);
       if (!verify.success) {
-        setError("Current password is incorrect.");
+        setError(t("account.pwIncorrect"));
         return;
       }
 
@@ -96,7 +96,7 @@ export default function ProfileForm() {
         newPassword: "",
         confirmPassword: "",
       }));
-      setSuccess("Changes saved.");
+      setSuccess(t("account.saved"));
     } catch (err) {
       setError(err.message);
     }
@@ -105,7 +105,7 @@ export default function ProfileForm() {
   if (profileLoading) {
     return (
       <div className="border border-line rounded-sm p-8 max-w-3xl text-sm text-body">
-        Loading profile…
+        {t("account.loading")}
       </div>
     );
   }
@@ -119,7 +119,7 @@ export default function ProfileForm() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <Input
-            label="First Name"
+            label={t("account.firstName")}
             name="firstName"
             value={form.firstName}
             onChange={handleChange}
@@ -141,7 +141,7 @@ export default function ProfileForm() {
             name="address"
             value={form.address}
             onChange={handleChange}
-            placeholder="Add your address"
+            placeholder={t("account.addAddress")}
           />
         </div>
 
@@ -187,7 +187,7 @@ export default function ProfileForm() {
             disabled={updateProfileMutation.isPending}
           >
             {updateProfileMutation.isPending
-              ? "Saving…"
+              ? t("account.saving")
               : t("account.saveChanges")}
           </Button>
         </div>

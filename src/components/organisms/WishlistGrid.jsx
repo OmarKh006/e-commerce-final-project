@@ -22,7 +22,7 @@ export default function WishlistGrid() {
   if (isLoading) {
     return (
       <div className="text-center py-24">
-        <p className="text-body text-sm">Loading your wishlist…</p>
+        <p className="text-body text-sm">{t("wishlist.loading")}</p>
       </div>
     );
   }
@@ -31,7 +31,7 @@ export default function WishlistGrid() {
     return (
       <div className="text-center py-24">
         <p className="text-error text-sm">
-          Couldn&apos;t load your wishlist. Please try again later.
+          {t("wishlist.loadError")}
         </p>
       </div>
     );
@@ -40,7 +40,9 @@ export default function WishlistGrid() {
   if (wishlistedProducts.length === 0) {
     return (
       <div className="text-center py-24">
-        <p className="text-body text-sm">Your wishlist is empty.</p>
+        <p className="text-body text-sm" data-testid="wishlist-empty">
+          {t("wishlist.empty")}
+        </p>
       </div>
     );
   }
@@ -58,7 +60,9 @@ export default function WishlistGrid() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {wishlistedProducts.map((p) => (
-          <ProductCard key={p.id} product={p} />
+          <div key={p.id} data-testid="wishlist-item" data-product-id={p.id}>
+            <ProductCard product={p} />
+          </div>
         ))}
       </div>
     </div>

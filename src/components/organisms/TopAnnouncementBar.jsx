@@ -6,8 +6,8 @@ export default function TopAnnouncementBar() {
 
   return (
     <div className="bg-black text-white text-xs">
-      <div className="max-w-7xl mx-auto px-4 h-9 flex items-center justify-center relative">
-        <p className="text-center">
+      <div className="max-w-7xl mx-auto px-4 min-h-9 py-1.5 flex items-center justify-center relative">
+        <p className="text-center pr-20 md:pr-0">
           {t('topBar.announcement')}{' '}
           <a href="#" className="underline font-medium">{t('topBar.shopNow')}</a>
         </p>
