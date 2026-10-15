@@ -5,8 +5,7 @@ import AuthFormPanel from "../components/organisms/AuthFormPanel";
 import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
 import { useAuth } from "../context/AuthContext";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { isValidEmail } from "../lib/validation";
 
 export default function Login() {
   const { t } = useTranslation();
@@ -29,7 +28,7 @@ export default function Login() {
     const found = {};
     const email = form.email.trim();
     if (!email) found.email = t("auth.errors.emailRequired");
-    else if (!EMAIL_RE.test(email)) found.email = t("auth.errors.emailInvalid");
+    else if (!isValidEmail(email)) found.email = t("auth.errors.emailInvalid");
     if (!form.password) found.password = t("auth.errors.passwordRequired");
     setErrors(found);
     if (Object.keys(found).length > 0) return;
@@ -38,10 +37,15 @@ export default function Login() {
     try {
       const result = await login(email, form.password);
       if (!result.success) {
+        const code = result.error.code;
         setFormError(
-          result.error.code === "invalid_credentials"
+          code === "invalid_credentials"
             ? t("auth.errors.invalidCredentials")
-            : result.error.message || t("auth.errors.generic"),
+            : code === "email_not_confirmed"
+              ? t("auth.errors.emailNotConfirmed")
+              : code === "over_request_rate_limit"
+                ? t("auth.errors.rateLimit")
+                : result.error.message || t("auth.errors.generic"),
         );
         return;
       }

@@ -166,7 +166,10 @@
       "passwordShort": "Le mot de passe doit contenir au moins 6 caractères.",
       "emailExists": "Un compte existe déjà avec cet e-mail.",
       "invalidCredentials": "E-mail ou mot de passe incorrect.",
-      "generic": "Une erreur est survenue. Veuillez réessayer."
+      "generic": "Une erreur est survenue. Veuillez réessayer.",
+      "emailRejected": "Cette adresse e-mail a été refusée. Utilisez une autre adresse.",
+      "emailNotConfirmed": "Confirmez d'abord votre e-mail, puis connectez-vous.",
+      "rateLimit": "Trop de tentatives. Patientez un instant et réessayez."
     },
     "confirmEmail": "Compte créé ! Vérifiez votre e-mail pour le confirmer, puis connectez-vous.",
     "submitting": "Veuillez patienter…"

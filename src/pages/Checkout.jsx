@@ -11,8 +11,8 @@ import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { formatPrice } from "../lib/format";
 import { newOrderId, saveOrder } from "../lib/orders";
+import { isValidEmail } from "../lib/validation";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validate(form, t) {
   const errors = {};
@@ -32,7 +32,7 @@ function validate(form, t) {
 
   const email = form.emailAddress.trim();
   if (!email) errors.emailAddress = required;
-  else if (!EMAIL_RE.test(email)) errors.emailAddress = t("checkout.errors.email");
+  else if (!isValidEmail(email)) errors.emailAddress = t("checkout.errors.email");
   return errors;
 }
 

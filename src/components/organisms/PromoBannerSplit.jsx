@@ -11,8 +11,8 @@ export function PromoBannerLarge({
   endsAt,
 }) {
   return (
-    <div className="bg-black text-white rounded-sm overflow-hidden flex flex-col md:flex-row items-center justify-between px-10 md:px-16 py-12 gap-8">
-      <div>
+    <div className="bg-black text-white rounded-sm overflow-hidden flex flex-col md:flex-row items-center justify-between px-5 sm:px-10 md:px-16 py-12 gap-8">
+      <div className="min-w-0">
         {eyebrow && (
           <p className="text-xs text-secondary-green mb-4">{eyebrow}</p>
         )}

@@ -153,7 +153,10 @@
       "passwordShort": "La contraseña debe tener al menos 6 caracteres.",
       "emailExists": "Ya existe una cuenta con este correo.",
       "invalidCredentials": "Correo o contraseña incorrectos.",
-      "generic": "Algo salió mal. Inténtalo de nuevo."
+      "generic": "Algo salió mal. Inténtalo de nuevo.",
+      "emailRejected": "Esta dirección de correo fue rechazada. Usa otro correo.",
+      "emailNotConfirmed": "Confirma primero tu correo y luego inicia sesión.",
+      "rateLimit": "Demasiados intentos. Espera un momento e inténtalo de nuevo."
     },
     "confirmEmail": "¡Cuenta creada! Revisa tu correo para confirmarla y luego inicia sesión.",
     "submitting": "Espera…"

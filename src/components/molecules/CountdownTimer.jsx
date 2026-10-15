@@ -27,11 +27,11 @@ export default function CountdownTimer({ endsAt, variant = "default" }) {
 
   if (variant === "circle") {
     return (
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4">
         {UNITS.map((u) => (
           <div
             key={u.key}
-            className="w-16 h-16 rounded-full bg-white flex flex-col items-center justify-center shrink-0"
+            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white flex flex-col items-center justify-center shrink-0"
           >
             <span className="font-heading text-lg font-bold text-ink tabular-nums leading-none">
               {String(time[u.key]).padStart(2, "0")}
@@ -44,9 +44,9 @@ export default function CountdownTimer({ endsAt, variant = "default" }) {
   }
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2 sm:gap-4">
       {UNITS.map((u, i) => (
-        <div key={u.key} className="flex items-center gap-4">
+        <div key={u.key} className="flex items-center gap-2 sm:gap-4">
           <div className="text-center">
             <span className="block text-xs text-ink">{u.label}</span>
             <span className="font-heading block text-xl font-bold text-ink tabular-nums">

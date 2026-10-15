@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col gap-20">
-      <div className="flex items-stretch gap-8 pb-8 border-b border-line">
+      <div className="flex items-stretch gap-8 pb-8 border-b border-line min-w-0">
         <HeroCategorySidebar />
         <HeroBanner />
       </div>

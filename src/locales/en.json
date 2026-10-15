@@ -153,7 +153,10 @@
       "passwordShort": "Password must be at least 6 characters.",
       "emailExists": "An account with this email already exists.",
       "invalidCredentials": "Incorrect email or password.",
-      "generic": "Something went wrong. Please try again."
+      "generic": "Something went wrong. Please try again.",
+      "emailRejected": "This email address was rejected. Please use a different email.",
+      "emailNotConfirmed": "Please confirm your email first, then log in.",
+      "rateLimit": "Too many attempts. Please wait a moment and try again."
     },
     "confirmEmail": "Account created! Check your email to confirm it, then log in.",
     "submitting": "Please wait…"

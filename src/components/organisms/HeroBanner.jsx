@@ -50,7 +50,7 @@ export default function HeroBanner() {
 
   return (
     <div className="bg-black text-white rounded-sm overflow-hidden flex flex-col md:flex-row items-center flex-1">
-      <div className="p-10 md:p-16 flex-1">
+      <div className="p-6 sm:p-10 md:p-16 flex-1 min-w-0">
         <p className="text-sm mb-4">{slide.eyebrow}</p>
         <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-6 max-w-xs">
           {slide.title}

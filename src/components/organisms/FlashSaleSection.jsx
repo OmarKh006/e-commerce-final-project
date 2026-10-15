@@ -19,10 +19,10 @@ export default function FlashSaleSection({ products, endsAt }) {
 
   return (
     <section>
-      <div className="flex items-end justify-between mb-6">
+      <div className="flex items-end justify-between gap-4 mb-6">
         <div>
           <SectionEyebrow>{t("home.today")}</SectionEyebrow>
-          <div className="flex items-center gap-10">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
             <h2 className="font-heading text-2xl font-semibold">
               {t("home.flashSales")}
             </h2>

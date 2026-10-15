@@ -38,8 +38,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
-        <div>
+      <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
+        <div className="min-w-0">
           <h3 className="font-heading text-lg font-bold mb-4">Exclusive</h3>
           <p className="text-sm mb-3">{t("footer.subscribe")}</p>
           <p className="text-xs text-white/70 mb-3">

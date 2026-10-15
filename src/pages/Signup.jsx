@@ -6,8 +6,7 @@ import AuthFormPanel from "../components/organisms/AuthFormPanel";
 import Input from "../components/atoms/Input";
 import Button from "../components/atoms/Button";
 import { useAuth } from "../context/AuthContext";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { isValidEmail } from "../lib/validation";
 
 export default function Signup() {
   const { t } = useTranslation();
@@ -32,7 +31,7 @@ export default function Signup() {
     const email = form.email.trim();
     if (!form.name.trim()) found.name = t("auth.errors.nameRequired");
     if (!email) found.email = t("auth.errors.emailRequired");
-    else if (!EMAIL_RE.test(email)) found.email = t("auth.errors.emailInvalid");
+    else if (!isValidEmail(email)) found.email = t("auth.errors.emailInvalid");
     if (!form.password) found.password = t("auth.errors.passwordRequired");
     else if (form.password.length < 6) found.password = t("auth.errors.passwordShort");
     setErrors(found);
@@ -44,9 +43,17 @@ export default function Signup() {
 
       if (!result.success) {
         const code = result.error.code;
+        const known = {
+          user_already_exists: "emailExists",
+          email_exists: "emailExists",
+          email_address_invalid: "emailRejected",
+          weak_password: "passwordShort",
+          over_email_send_rate_limit: "rateLimit",
+          over_request_rate_limit: "rateLimit",
+        };
         setFormError(
-          code === "user_already_exists" || code === "email_exists"
-            ? t("auth.errors.emailExists")
+          known[code]
+            ? t(`auth.errors.${known[code]}`)
             : result.error.message || t("auth.errors.generic"),
         );
         return;
